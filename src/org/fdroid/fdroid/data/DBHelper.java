@@ -198,6 +198,16 @@ public class DBHelper extends SQLiteOpenHelper {
             context.getResources().getInteger(R.integer.default_repo_inuse2),
             context.getResources().getInteger(R.integer.default_repo_priority2)
         );
+
+        insertRepo(
+            db,
+            context.getString(R.string.default_repo_name3),
+            context.getString(R.string.default_repo_address3),
+            context.getString(R.string.default_repo_description3),
+            null, //context.getString(R.string.default_repo_pubkey3),
+            context.getResources().getInteger(R.integer.default_repo_inuse3),
+            context.getResources().getInteger(R.integer.default_repo_priority3)
+        );
     }
 
     private void insertRepo(
@@ -301,6 +311,11 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put("description", context.getString(R.string.default_repo_description2));
             db.update(TABLE_REPO, values, "address = ?", new String[] {
                 context.getString(R.string.default_repo_address2) });
+            values.clear();
+            values.put("name", context.getString(R.string.default_repo_name3));
+            values.put("description", context.getString(R.string.default_repo_description3));
+            db.update(TABLE_REPO, values, "address = ?", new String[] {
+                context.getString(R.string.default_repo_address3) });
         }
 
     }
