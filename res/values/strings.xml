@@ -215,5 +215,6 @@
 
     <string name="app_icon">App icon</string>
     <string name="repo_icon">Repo icon</string>
+    <string name="tab_category">category</string>
 
 </resources>

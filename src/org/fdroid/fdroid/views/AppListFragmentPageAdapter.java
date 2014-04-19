@@ -10,6 +10,7 @@ import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.views.fragments.AvailableAppsFragment;
 import org.fdroid.fdroid.views.fragments.CanUpdateAppsFragment;
+import org.fdroid.fdroid.views.fragments.CategoryListFragment;
 import org.fdroid.fdroid.views.fragments.InstalledAppsFragment;
 
 /**
@@ -40,10 +41,14 @@ public class AppListFragmentPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
+    	
         if ( i == 0 ) {
+            return new CategoryListFragment();
+        } 	
+        if ( i == 1 ) {
             return new AvailableAppsFragment();
         }
-        if ( i == 1 ) {
+        if ( i == 2 ) {
             return new InstalledAppsFragment();
         }
         return new CanUpdateAppsFragment();
@@ -51,17 +56,19 @@ public class AppListFragmentPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Override
     public String getPageTitle(int i) {
         switch(i) {
-            case 0:
-                return parent.getString(R.string.tab_noninstalled);
+        	case 0:
+        		return parent.getString(R.string.tab_category);
             case 1:
-                return parent.getString(R.string.inst);
+                return parent.getString(R.string.tab_noninstalled);
             case 2:
+                return parent.getString(R.string.inst);
+            case 3:
                 return getUpdateTabTitle();
             default:
                 return "";

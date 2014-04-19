@@ -28,8 +28,8 @@ public class AvailableAppsFragment extends AppListFragment implements
     public static final String CATEGORY_KEY = "Selection";
     public static String DEFAULT_CATEGORY;
 
-    private Spinner categorySpinner;
-    private String currentCategory = null;
+    public static Spinner categorySpinner;
+    public static String currentCategory = null;
     private AppListAdapter adapter = null;
 
     @Override
