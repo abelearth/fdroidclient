@@ -19,6 +19,6 @@
     <string name="default_repo_name3" formatted="false">F-Droid Test</string>
     <integer name="default_repo_inuse3">1</integer>
     <integer name="default_repo_priority3">10</integer>
-    <string name="default_repo_address3" formatted="false">http://192.168.88.88/fdroid/repo</string>
+    <string name="default_repo_address3" formatted="false">http://abelearth.github.io/fdroidrepo/repo</string>
     <string name="default_repo_description3" formatted="false">The test repository of the F-Droid client. </string>
 </resources>
