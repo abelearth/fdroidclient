@@ -204,7 +204,7 @@ public class DBHelper extends SQLiteOpenHelper {
             context.getString(R.string.default_repo_name3),
             context.getString(R.string.default_repo_address3),
             context.getString(R.string.default_repo_description3),
-            null, //context.getString(R.string.default_repo_pubkey3),
+            context.getString(R.string.default_repo_pubkey3),
             context.getResources().getInteger(R.integer.default_repo_inuse3),
             context.getResources().getInteger(R.integer.default_repo_priority3)
         );
