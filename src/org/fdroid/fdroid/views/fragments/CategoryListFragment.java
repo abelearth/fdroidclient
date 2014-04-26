@@ -3,17 +3,12 @@ package org.fdroid.fdroid.views.fragments;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.Instrumentation;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.Cursor;
+
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.SystemClock;
+
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.LoaderManager;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,17 +16,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.views.AppListFragmentPageAdapter;
 import org.fdroid.fdroid.views.fragments.AvailableAppsFragment;
-
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 
 

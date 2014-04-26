@@ -43,6 +43,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -75,6 +76,8 @@ public class FDroid extends FragmentActivity {
     private ViewPager viewPager;
 
     private TabManager tabManager = null;
+    
+    private static boolean isScrolled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -344,6 +347,14 @@ public class FDroid extends FragmentActivity {
             public void onPageSelected(int position) {
                 getTabManager().selectTab(position);
             }
+            
+            @Override
+            public void onPageScrollStateChanged(int state){
+            	isScrolled = false;
+            	if(state == 2){
+            		isScrolled = true;
+            	}
+            }
         });
     }
 
@@ -434,4 +445,22 @@ public class FDroid extends FragmentActivity {
             }
         }
     }
+    
+    //Goto Search Focus
+    public boolean dispatchKeyEvent(KeyEvent event){		
+    	if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT){
+    		if(viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !isScrolled){
+    			//Avoid conflicts of the key action
+    			isScrolled = true;
+    			
+    			//Goto Search Focus
+    	    	View ViewSearch = findViewById(SEARCH);
+    	    	ViewSearch.requestFocus(SEARCH);
+    	    	
+    	    	return true;
+    		}
+    	}
+		return super.dispatchKeyEvent(event);
+    }
+    
 }
