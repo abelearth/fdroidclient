@@ -447,11 +447,12 @@ public class FDroid extends FragmentActivity {
     }
     
     //Goto Search Focus
-    public boolean dispatchKeyEvent(KeyEvent event){		
+    public boolean dispatchKeyEvent(KeyEvent event){   	
+    	
     	if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT){
-    		if(viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !isScrolled){
-    			//Avoid conflicts of the key action
-    			isScrolled = true;
+    		if(viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 
+    				&& !isScrolled
+    				&& viewPager.findFocus() != null){
     			
     			//Goto Search Focus
     	    	View ViewSearch = findViewById(SEARCH);
