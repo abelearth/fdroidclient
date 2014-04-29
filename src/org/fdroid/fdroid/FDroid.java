@@ -58,13 +58,13 @@ import org.fdroid.fdroid.views.AppListFragmentPageAdapter;
 public class FDroid extends FragmentActivity {
 
     public static final int REQUEST_APPDETAILS = 0;
-    public static final int REQUEST_MANAGEREPOS = 1;
+//    public static final int REQUEST_MANAGEREPOS = 1;
     public static final int REQUEST_PREFS = 2;
 //    public static final int REQUEST_ENABLE_BLUETOOTH = 3;
 
     public static final String EXTRA_TAB_UPDATE = "extraTab";
 
-    private static final int MANAGE_REPO = Menu.FIRST;
+//    private static final int MANAGE_REPO = Menu.FIRST;
     private static final int PREFERENCES = Menu.FIRST + 1;
     private static final int ABOUT = Menu.FIRST + 2;
     private static final int SEARCH = Menu.FIRST + 3;
@@ -146,8 +146,8 @@ public class FDroid extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         super.onCreateOptionsMenu(menu);
-        menu.add(Menu.NONE, MANAGE_REPO, 2, R.string.menu_manage).setIcon(
-                android.R.drawable.ic_menu_agenda);
+//        menu.add(Menu.NONE, MANAGE_REPO, 2, R.string.menu_manage).setIcon(
+//                android.R.drawable.ic_menu_agenda);
         MenuItem search = menu.add(Menu.NONE, SEARCH, 3, R.string.menu_search).setIcon(
                 android.R.drawable.ic_menu_search);
 //        if (mBluetoothAdapter != null) // ignore on devices without Bluetooth
@@ -165,10 +165,10 @@ public class FDroid extends FragmentActivity {
 
         switch (item.getItemId()) {
 
-        case MANAGE_REPO:
-            Intent i = new Intent(this, ManageRepo.class);
-            startActivityForResult(i, REQUEST_MANAGEREPOS);
-            return true;
+//        case MANAGE_REPO:
+//            Intent i = new Intent(this, ManageRepo.class);
+//            startActivityForResult(i, REQUEST_MANAGEREPOS);
+//            return true;
 
         case PREFERENCES:
             Intent prefs = new Intent(getBaseContext(), PreferencesActivity.class);
@@ -252,32 +252,32 @@ public class FDroid extends FragmentActivity {
         switch (requestCode) {
         case REQUEST_APPDETAILS:
             break;
-        case REQUEST_MANAGEREPOS:
-            if (data.hasExtra(ManageRepo.REQUEST_UPDATE)) {
-                AlertDialog.Builder ask_alrt = new AlertDialog.Builder(this);
-                ask_alrt.setTitle(getString(R.string.repo_update_title));
-                ask_alrt.setIcon(android.R.drawable.ic_menu_rotate);
-                ask_alrt.setMessage(getString(R.string.repo_alrt));
-                ask_alrt.setPositiveButton(getString(R.string.yes),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                    int whichButton) {
-                            updateRepos();
-                            }
-                        });
-                ask_alrt.setNegativeButton(getString(R.string.no),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                    int whichButton) {
-                                // do nothing
-                            }
-                        });
-                AlertDialog alert = ask_alrt.create();
-                alert.show();
-            }
-            break;
+//        case REQUEST_MANAGEREPOS:
+//            if (data.hasExtra(ManageRepo.REQUEST_UPDATE)) {
+//                AlertDialog.Builder ask_alrt = new AlertDialog.Builder(this);
+//                ask_alrt.setTitle(getString(R.string.repo_update_title));
+//                ask_alrt.setIcon(android.R.drawable.ic_menu_rotate);
+//                ask_alrt.setMessage(getString(R.string.repo_alrt));
+//                ask_alrt.setPositiveButton(getString(R.string.yes),
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog,
+//                                    int whichButton) {
+//                            updateRepos();
+//                            }
+//                        });
+//                ask_alrt.setNegativeButton(getString(R.string.no),
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog,
+//                                    int whichButton) {
+//                                // do nothing
+//                            }
+//                        });
+//                AlertDialog alert = ask_alrt.create();
+//                alert.show();
+//            }
+//            break;
         case REQUEST_PREFS:
             // The automatic update settings may have changed, so reschedule (or
             // unschedule) the service accordingly. It's cheap, so no need to
