@@ -705,11 +705,11 @@ public class AppDetails extends ListActivity {
             }
         }
 
-        MenuItemCompat.setShowAsAction(menu.add(
-                    Menu.NONE, SHARE, 1, R.string.menu_share)
-                    .setIcon(android.R.drawable.ic_menu_share),
-                MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
-                MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+//        MenuItemCompat.setShowAsAction(menu.add(
+//                    Menu.NONE, SHARE, 1, R.string.menu_share)
+//                    .setIcon(android.R.drawable.ic_menu_share),
+//                MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
+//                MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 
         menu.add(Menu.NONE, IGNOREALL, 2, R.string.menu_ignore_all)
                     .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
