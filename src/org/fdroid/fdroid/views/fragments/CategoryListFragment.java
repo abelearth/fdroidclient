@@ -64,7 +64,7 @@ public  class CategoryListFragment extends Fragment {
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
 
-					Log.d("FDroid","OnItemClick(position = "+position+")" );	
+//					Log.d("FDroid","OnItemClick(position = "+position+")" );	
 					ShowAvailableAppsFragment(categories.get(position));
 				}
 	        });
@@ -79,13 +79,13 @@ public  class CategoryListFragment extends Fragment {
 	    	//Restore Category
 	    	AvailableAppsFragment.currentCategory = category;
 	    	
-	    	Log.d("FDroid", "current category is "+ AvailableAppsFragment.currentCategory +"!!!");
+//	    	Log.d("FDroid", "current category is "+ AvailableAppsFragment.currentCategory +"!!!");
 	    	
 	    	ViewPager viewPager = (ViewPager)getActivity().findViewById(R.id.main_pager);
 	        viewPager.setAdapter(viewPager.getAdapter());    
 	        viewPager.setCurrentItem(1); //1:AvailableAppsFragment
 	    	
-	    	Log.d("FDroid","Showing AvailableAppsFragment!");
+//	    	Log.d("FDroid","Showing AvailableAppsFragment!");
 	    }
 }
 

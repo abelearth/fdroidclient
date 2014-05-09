@@ -346,14 +346,19 @@ public class FDroid extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 getTabManager().selectTab(position);
+                refreshUpdateTabLabel();
             }
             
             @Override
-            public void onPageScrollStateChanged(int state){
-            	isScrolled = false;
+            public void onPageScrollStateChanged(int state){       	
             	if(state == 2){
             		isScrolled = true;
             	}
+            	else if(state == 0){
+            		isScrolled = false;
+            	}
+            	
+//            	Log.d("FDroid","-onPageScrollStateChanged-"+ isScrolled);
             }
         });
     }
@@ -394,7 +399,9 @@ public class FDroid extends FragmentActivity {
     }
 
     public void refreshUpdateTabLabel() {
-        getTabManager().refreshTabLabel(TabManager.INDEX_CAN_UPDATE);
+//        getTabManager().refreshTabLabel(TabManager.INDEX_CAN_UPDATE);
+//        getTabManager().refreshTabLabel(TabManager.INDEX_INSTALLED);
+        getTabManager().refreshTabLabel(TabManager.INDEX_AVAILABLE);
     }
 
     public void removeNotification(int id) {
@@ -414,7 +421,7 @@ public class FDroid extends FragmentActivity {
             FDroid.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    refreshUpdateTabLabel();
+                	FDroid.this.recreate();
                 }
             });
         }
@@ -445,22 +452,30 @@ public class FDroid extends FragmentActivity {
             }
         }
     }
-    
-    //Goto Search Focus
-    public boolean dispatchKeyEvent(KeyEvent event){   	
-    	
+     
+    //Dispatch KeyEvent
+    public boolean dispatchKeyEvent(KeyEvent event){   		
     	if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT){
-    		if(viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 
-    				&& !isScrolled
-    				&& viewPager.findFocus() != null){
-    			
-    			//Goto Search Focus
-    	    	View ViewSearch = findViewById(SEARCH);
-    	    	ViewSearch.requestFocus(SEARCH);
-    	    	
-    	    	return true;
+    		if(viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1){
+    			if( (!isScrolled) && (viewPager.findFocus() != null) ){
+        			//Goto Search Focus
+    		    	View ViewSearch = findViewById(SEARCH);
+    				ViewSearch.requestFocus(SEARCH);
+//    				Log.d("FDroid","Goto Search Focus");
+    				return true;
+    			}
     		}
-    	}
+    	}  	
+	   	else if(event.getKeyCode() == KeyEvent.KEYCODE_BACK){
+    		if( (viewPager.getCurrentItem() != 0)){   			
+    			//Go back to Category list fragment first
+    			viewPager.setCurrentItem(0);
+    			viewPager.requestFocus();
+//    			Log.d("FDroid","Go back Category list fragment first");
+    			return true;
+    		}    		
+	    }
+    	
 		return super.dispatchKeyEvent(event);
     }
     

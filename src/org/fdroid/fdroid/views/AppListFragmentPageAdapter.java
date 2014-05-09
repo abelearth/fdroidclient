@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import org.fdroid.fdroid.FDroid;
 import org.fdroid.fdroid.R;
@@ -26,8 +27,8 @@ public class AppListFragmentPageAdapter extends FragmentPagerAdapter {
         this.parent = parent;
     }
 
-    private String getUpdateTabTitle() {
-        Uri uri = AppProvider.getCanUpdateUri();
+
+    private String getTabTitle(Uri uri) {
         String[] projection = new String[] { AppProvider.DataColumns._COUNT };
         Cursor cursor = parent.getContentResolver().query(uri, projection, null, null, null);
         String suffix = "";
@@ -36,9 +37,10 @@ public class AppListFragmentPageAdapter extends FragmentPagerAdapter {
             int count = cursor.getInt(0);
             suffix = " (" + count + ")";
         }
-        return parent.getString(R.string.tab_updates) + suffix;
+        
+        return suffix;
     }
-
+    
     @Override
     public Fragment getItem(int i) {
     	
@@ -61,18 +63,41 @@ public class AppListFragmentPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public String getPageTitle(int i) {
+    	Uri uri = null;
+    	String currentCategory_uri = AvailableAppsFragment.currentCategory;
+    	String Title = "";
+    	
         switch(i) {
         	case 0:
         		return parent.getString(R.string.tab_category);
             case 1:
-                return parent.getString(R.string.tab_noninstalled);
+                if(currentCategory_uri.equals(parent.getString(R.string.category_all))){
+                	uri = AppProvider.getContentUri();
+                }
+                else if(currentCategory_uri.equals(parent.getString(R.string.category_recentlyupdated))){
+                	uri = AppProvider.getRecentlyUpdatedUri();
+                }
+                else if(currentCategory_uri.equals(parent.getString(R.string.category_whatsnew))){
+                	uri = AppProvider.getNewlyAddedUri();
+                }
+                else{
+                	uri = AppProvider.getCategoryUri(currentCategory_uri);
+                }
+                Title = parent.getString(R.string.tab_noninstalled);
+                break;
             case 2:
-                return parent.getString(R.string.inst);
+                uri = AppProvider.getInstalledUri();
+                Title = parent.getString(R.string.inst);
+            	break;
             case 3:
-                return getUpdateTabTitle();
+            	uri = AppProvider.getCanUpdateUri();
+            	Title = parent.getString(R.string.tab_updates);
+            	break;
             default:
-                return "";
+                return "";    
         }
+        
+        return Title + getTabTitle(uri);  
     }
 
 }

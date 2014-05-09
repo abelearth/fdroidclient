@@ -17,10 +17,11 @@ import org.fdroid.fdroid.FDroid;
 import org.fdroid.fdroid.R;
 
 public abstract class TabManager extends Compatibility {
-
-    public static final int INDEX_AVAILABLE  = 0;
-    public static final int INDEX_INSTALLED  = 1;
-    public static final int INDEX_CAN_UPDATE = 2;
+	
+	public static final int INDEX_CATEGORY  = 0;
+    public static final int INDEX_AVAILABLE  = 1;
+    public static final int INDEX_INSTALLED  = 2;
+    public static final int INDEX_CAN_UPDATE = 3;
 
     public static TabManager create(FDroid parent, ViewPager pager) {
         if (hasApi(11)) {
@@ -92,6 +93,12 @@ class OldTabManagerImpl extends TabManager {
             }
         };
 
+        TabHost.TabSpec categoryTabSpec = tabHost.newTabSpec("category")
+                .setIndicator(
+                        parent.getString(R.string.app_name),
+                        parent.getResources().getDrawable(android.R.drawable.ic_input_add))
+                .setContent(factory);
+        
         TabHost.TabSpec availableTabSpec = tabHost.newTabSpec("available")
                 .setIndicator(
                         parent.getString(R.string.tab_noninstalled),
@@ -110,6 +117,7 @@ class OldTabManagerImpl extends TabManager {
                         parent.getResources().getDrawable(android.R.drawable.star_on))
                 .setContent(factory);
 
+        tabHost.addTab(categoryTabSpec);
         tabHost.addTab(availableTabSpec);
         tabHost.addTab(installedTabSpec);
         tabHost.addTab(canUpdateTabSpec);
